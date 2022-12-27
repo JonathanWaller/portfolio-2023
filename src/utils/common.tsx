@@ -6,7 +6,8 @@ import { MapLocation } from '../types/map';
 export const navSections: {[key: string]: string}[] = [
     { display: 'About', section: 'about'},
     { display: 'Experience', section: 'experience' },
-    { display: 'Projects', section: 'projects'}
+    { display: 'Projects', section: 'projects'},
+    {display: 'Contact', section: 'contact'}
 ]
 
 // ** About - Map ** //

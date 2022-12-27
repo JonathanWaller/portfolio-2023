@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { ArrowLeft, ArrowRight } from "react-feather";
+import { ArrowLeft, ArrowRight, GitHub } from "react-feather";
+
+import Heading from "./shared/Heading";
 
 import { sectionMargins } from "../styles/mixins";
 import { breakpoints } from "../styles/breakpoints";
-
 import { gray, white, black } from "../styles/colors";
 
 import { greenwoodImages, restayImages } from "../utils/common";
@@ -23,43 +24,6 @@ const Container = styled.div`
         gap: 200px;
         padding-top: 200px;
         padding-bottom: 200px;
-    }
-`
-
-const MainText = styled.h1`
-    font-family: Sora, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-        sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 92px;
-    line-height: 80px;
-    /* identical to box height, or 87% */
-
-    text-align: center;
-    letter-spacing: -0.02em;
-
-    color: ${white}
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-
-    ${sectionMargins}
-
-    @media (max-width: ${breakpoints.lg}px) {
-        font-size: 72px;
-        line-height: 72px;
-    }
-
-    @media (max-width: ${breakpoints.md}px) {
-        font-size: 58px;
-        line-height: 58px;
-    }
-
-    @media (max-width: ${breakpoints.sm}px) {
-       font-size: 50px;
-       line-height: 50px;
     }
 `
 
@@ -283,8 +247,8 @@ const StyledImage = styled.img`
     image-rendering: crisp-edges;
 `
 
-const LeftArrow = styled(ArrowLeft)`
-    color: red;
+const LeftArrow = styled(ArrowLeft)<{dark?: boolean}>`
+    color: ${({dark}) => dark ? `${black}` : `${gray}`};
     position: absolute;
     top: 50%;
     left: 5px;
@@ -294,8 +258,8 @@ const LeftArrow = styled(ArrowLeft)`
     }
 `
 
-const RightArrow = styled(ArrowRight)`
-    color: red;
+const RightArrow = styled(ArrowRight)<{dark?: boolean}>`
+    color: ${({dark}) => dark ? `${black}` : `${gray}`};
     position: absolute;
     top: 50%;
     right: 5px;
@@ -462,7 +426,7 @@ const Projects: React.FC<Props> = ({viewRef}) => {
 
     return(
         <>
-        <MainText>Projects</MainText>
+        <Heading headingText="Projects" />
         <Container>
             <FeatureTextColumn id="feature-text-column">
                 <FeatureTextContainer id="feature-1">
@@ -524,8 +488,8 @@ const Projects: React.FC<Props> = ({viewRef}) => {
                         <source src={featureVideo2MP4} type="video/mp4"/>
                     </FeatureVideo> */}
                     <FeatureImageContainer>
-                        <LeftArrow onClick={()=>handleNavigate( 'restay', test2('restay', 'left') )}/>
-                        <RightArrow onClick={()=>handleNavigate( 'restay', test2('restay', 'right'))} />
+                        <LeftArrow dark  onClick={()=>handleNavigate( 'restay', test2('restay', 'left') )}/>
+                        <RightArrow dark onClick={()=>handleNavigate( 'restay', test2('restay', 'right'))} />
                         <StyledImage
                             src={restayImages[restay].src}
                             alt="restay img"
