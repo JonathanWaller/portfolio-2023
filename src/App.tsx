@@ -6,12 +6,10 @@ import Nav from './components/Nav';
 import Intro from './components/Intro';
 import Experience from './components/Experience/Experience';
 import Projects from './components/Projects';
+import Contact from './components/Contact';
 
 
 const AppContainer = styled.div`
-  // max-width: 100vw;
-  // overflow-x: hidden;
-
   height: 100vh;
   width: 100vw;
 `
@@ -20,6 +18,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 100px;
+  padding-bottom: 25px;
 `
 
 const App = () => {
@@ -40,6 +39,7 @@ const App = () => {
         <div id='intro'><Intro /></div>
         <div id="experience"><Experience viewRef={viewRef} /></div>
         <div id="projects"><Projects viewRef={viewRef}/></div>
+        <div id="contact"><Contact /></div>
       </Container>
     </AppContainer>
   )
