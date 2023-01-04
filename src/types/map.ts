@@ -4,3 +4,10 @@ export interface MapLocation {
     company: string;
     title: string;
 }
+
+export interface Coordinate {
+    id: number;
+    place: string;
+    lat: number;
+    long: number
+}

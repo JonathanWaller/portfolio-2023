@@ -8,6 +8,8 @@ import Experience from './components/Experience/Experience';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 
+import { sectionMargins } from './styles/mixins';
+
 
 const AppContainer = styled.div`
   height: 100vh;
@@ -19,6 +21,7 @@ const Container = styled.div`
   flex-direction: column;
   gap: 100px;
   padding-bottom: 25px;
+  ${sectionMargins};
 `
 
 const App = () => {
