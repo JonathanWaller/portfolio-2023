@@ -1,25 +1,38 @@
-
-
 import { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
 // import { geoPath, geoOrthographic } from 'd3-geo'
 // import * as topojson from 'topojson';
 
+import { Coordinate } from '../types/map';
+
+import {useContainerDimensions} from '../hooks/useContainerDimensions';
+
 interface Props {
-    selectedLocation: number;
+    selectedLocation: any;
+    setSelectedLocation: ( location: Coordinate ) => void;
 }
 
-const Home: React.FC<Props> = ({selectedLocation}) => {
+const Home: React.FC<Props> = ({selectedLocation, setSelectedLocation }) => {
     const chartContainerRef: any = useRef( null )
     const svgRef = useRef( null );
     const [ states, setStates ] = useState<any> ()
     const [ cities, setCities ] = useState<any>( )
 
-    var width = 960,
+    const { containerWidth
+        // , containerHeight 
+    } = useContainerDimensions( chartContainerRef )
+
+    // const location = selectedLocation ? selectedLocation : cities.find( (c:Coordinate) => c.place === 'Home')
+
+    // var width = 960,
+    var width = containerWidth,
+    // var width = 500,
+    // const width = containerWidth/2,
+    // height = 400;
     height = 500;
 
     const projection = d3.geoAlbersUsa()
-        .translate([width/2, height/2])
+        // .translate([width/2, height/2])
         .scale(1070)
         .translate([width / 2, height / 2]);
 
@@ -63,7 +76,7 @@ const Home: React.FC<Props> = ({selectedLocation}) => {
     // });
 
     // Map the cities I've lived
-    if( cities?.features) {
+    if( cities?.features && selectedLocation) {
         const { features } = cities;
         console.log('SOOOOO', cities)
         svg.selectAll("circle")
@@ -81,7 +94,7 @@ const Home: React.FC<Props> = ({selectedLocation}) => {
         })
         .attr("r", (d:any) => d.place === "Home" ? 12 : 4 )	
         // .style("fill", ( d: any ) => d.place === 'Home' ? "red" : "blue")
-        .style("fill", ( d: any ) => d.place === 'Home' ? "red" : d.id === selectedLocation ? 'green' : 'blue')
+        .style("fill", ( d: any ) => d.id === selectedLocation.id ? "red" : 'blue')
         .style("opacity", (d:any) => d.place === "Home" ? .4 : 0.85)
         
 
@@ -89,8 +102,9 @@ const Home: React.FC<Props> = ({selectedLocation}) => {
         //     console.log('PLACE: ', d) 
         // })   
         .on("click", function(d) {      
-            console.log('PLACE: ', d.target.__data__
-            ) 
+            // console.log('PLACE: ', d.target.__data__)
+            setSelectedLocation( d.target.__data__)
+            
         })   
         
     }
@@ -111,9 +125,11 @@ const Home: React.FC<Props> = ({selectedLocation}) => {
         fetch('/data/cities.json').then( ( response ) => {
             response.json().then( ( citiesData) => {
                 setCities( citiesData)
+                console.log('CITIES DATA: ', citiesData)
+                setSelectedLocation( citiesData.features.find( (c:Coordinate) => c.place === 'Home') )
             })
         } )
-    }, [])
+    }, [setSelectedLocation])
 
     console.log('STATES: ', states)
 
@@ -137,20 +153,33 @@ const Home: React.FC<Props> = ({selectedLocation}) => {
         //     </g> */}
         // </svg>
 
-        <div 
+        <>  
+        {
+            states
+            ?
+
+            <div 
             ref={chartContainerRef}
-            style={{ width: '100%', height: 550}}
+            // style={{ width: '50%', height: 550, border: '1px solid green'}}
+            // style={{border: '1px solid green'}}
         >
 
-            <div>
+            {/* <div> */}
                 <svg ref={svgRef}
-                    style={{width: '100%', height: 1000}}
+                    style={{width: '100%', height: 1000, border: '1px solid blue'}}
                 >
                     
                 </svg>
-            </div>
+            {/* </div> */}
 
         </div>
+
+            : <div>Pending</div>
+        }
+
+        </>
+
+        
     )
 }
 

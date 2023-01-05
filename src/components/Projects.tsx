@@ -5,23 +5,23 @@ import { ArrowLeft, ArrowRight, GitHub } from "react-feather";
 
 import Heading from "./shared/Heading";
 
-import { sectionMargins } from "../styles/mixins";
 import { breakpoints } from "../styles/breakpoints";
-import { gray, white, black } from "../styles/colors";
+import { gray, white, black, darkGray } from "../styles/colors";
 
 import { greenwoodImages, restayImages } from "../utils/common";
 
 const Container = styled.div`
     width: 100%;
-    ${sectionMargins}
 
     display: flex;
     justify-content: space-between;
     align-items: start;
 
+    border: 1px solid pink;
+
     @media (max-width: ${breakpoints.md}px) {
         flex-direction: column;
-        gap: 200px;
+        // gap: 200px;
         padding-top: 200px;
         padding-bottom: 200px;
     }
@@ -30,7 +30,7 @@ const Container = styled.div`
 const FeatureTextColumn = styled.div`
     display: flex;
     flex-direction: column;
-    flex-basis: 35%;
+    flex-basis: 45%;
 
     gap: 500px;
     padding-top: 350px;
@@ -63,7 +63,7 @@ const FeatureTypeTagRainbowContainer = styled.div`
     height: min-content;
 `
 
-const FeatureTypeTag = styled.div`
+const FeatureTypeTag = styled.a`
     background: linear-gradient(107.79deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.02) 100%), ${black};
     border-radius: 20px;
     padding: 7px 14px;
@@ -81,7 +81,22 @@ const FeatureTypeTag = styled.div`
     font-feature-settings: 'liga' off;
 
     color: ${white};
+    gap: 10px;
+    text-decoration: none;
+    
 `
+
+const StyledGithub = styled(GitHub)`
+    stroke: ${white};
+    stroke-width: 1.8px;
+    height: 18px;
+    width: 18px;
+
+    &:hover {
+        cursor: pointer;
+        stroke-width: 2px;
+    }
+` 
 
 const FeatureHeaderText = styled.h2`
     font-family: 'Sora';
@@ -91,7 +106,7 @@ const FeatureHeaderText = styled.h2`
     line-height: 110%;
     letter-spacing: -0.03em;
 
-    color: ${white};
+    color: ${darkGray};
 
     @media (max-width: ${breakpoints.xl}px) {
         font-size: 56px;
@@ -206,10 +221,12 @@ const FeatureImageContainer = styled.div`
     overflow: hidden;
 
     border: 1px solid green;
-    height: 42vh;
-    // height: 60vh;
-    width: auto;
-    // width: 100%;
+    // height: 42vh;
+    // height: 50vh;
+    height: auto;
+    width: 100%;
+
+    // background-size: contain;
 
     position: relative;
 
@@ -234,9 +251,14 @@ const FeatureImageContainer = styled.div`
 `
 
 const StyledImage = styled.img`
-    max-height: 100%;
+    // max-height: 100%;
+    // max-width: 100%;
+    // object-fit: contain;
+    background-size: contain;
+
     max-width: 100%;
-    object-fit: contain;
+    height: auto;
+    // display: block;
 
     image-rendering: -moz-crisp-edges;
     /* Firefox */
@@ -245,6 +267,38 @@ const StyledImage = styled.img`
     image-rendering: -webkit-optimize-contrast;
     /* Webkit (non-standard naming) */
     image-rendering: crisp-edges;
+`
+
+// const StyledImage = styled.div`
+//     // max-height: 100%;
+//     // max-width: 100%;
+//     // object-fit: contain;
+
+//     // width: 250px;
+//     // height: 300px;
+
+//     width: 100%;
+//     height: 100%;
+
+//     background-image: url(${ props => props.color });
+
+//     background-size: contain;
+//     background-repeat: no-repeat;
+//     background-position: 50% 50%;
+// `
+
+const StatusTag = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 5px 10px;
+    gap: 10px;
+    height: 35px;
+    border-radius: 6px;
+    width: fit-content;
+
+    color: red;
+    background: ${ props => props.color };
 `
 
 const LeftArrow = styled(ArrowLeft)<{dark?: boolean}>`
@@ -431,7 +485,14 @@ const Projects: React.FC<Props> = ({viewRef}) => {
             <FeatureTextColumn id="feature-text-column">
                 <FeatureTextContainer id="feature-1">
                     <FeatureTypeTagRainbowContainer>
-                        <FeatureTypeTag>Greenwood</FeatureTypeTag>
+                        <FeatureTypeTag
+                            target="_blank" 
+                            rel="noreferrer"
+                            href="https://github.com/greenwood-labs/kovan-greenwood-v2-interface"
+                        >
+                            Greenwood
+                            <StyledGithub />
+                        </FeatureTypeTag>
                     </FeatureTypeTagRainbowContainer>
                     <FeatureHeaderText>
                         DeFi tool
@@ -442,13 +503,20 @@ const Projects: React.FC<Props> = ({viewRef}) => {
                 </FeatureTextContainer>
                 <FeatureTextContainer id="feature-2">
                     <FeatureTypeTagRainbowContainer>
-                        <FeatureTypeTag>Restay</FeatureTypeTag>
+                        <FeatureTypeTag 
+                            target="_blank" 
+                            rel="noreferrer"
+                            href="https://github.com/JonathanWaller/Personal_Project-Rentals"
+                        >
+                            Restay
+                            <StyledGithub />
+                        </FeatureTypeTag>
                     </FeatureTypeTagRainbowContainer>
                     <FeatureHeaderText>
-                        Cut out the noise, get to the yield
+                        Welcome home
                     </FeatureHeaderText>
                     <FeatureSubheaderText>
-                        Greenwood analyzes and compares thousands of DeFi protocols to find the investment opportunities that best meet your needs.
+                        airbnb-like resource to book short-term rentals
                     </FeatureSubheaderText>
                 </FeatureTextContainer>
                 <FeatureTextContainer id="feature-3">
@@ -480,6 +548,7 @@ const Projects: React.FC<Props> = ({viewRef}) => {
                         <LeftArrow onClick={()=>handleNavigate( 'greenwood', test2('greenwood', 'left') )}/>
                         <RightArrow onClick={()=>handleNavigate( 'greenwood', test2('greenwood', 'right') )} />
                         <StyledImage src={greenwoodImages[greenwood].src} alt="Greenwood Loans" /> 
+                        {/* <StyledImage color={greenwoodImages[restay].src }></StyledImage> */}
                     </FeatureImageContainer>
                 </FeatureImageWrapper>
                 <FeatureImageWrapper style={{opacity: imageVisible === '2' ? 1 : 0 }}>
@@ -494,6 +563,7 @@ const Projects: React.FC<Props> = ({viewRef}) => {
                             src={restayImages[restay].src}
                             alt="restay img"
                         /> 
+                        {/* <StyledImage color={greenwoodImages[restay].src }></StyledImage> */}
                     </FeatureImageContainer>
                 </FeatureImageWrapper>
                 <FeatureImageWrapper style={{opacity: imageVisible === '3' ? 1 : 0 }}>
