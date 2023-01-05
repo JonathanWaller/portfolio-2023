@@ -2,6 +2,8 @@
     "features": [
         {"id": 1, "place": "Home", "lat": 40.71455, "lon": -74.007124 },
         {"id": 2, "place": "New York City", "lat": 40.71455, "lon": -74.007124 },
-        {"id": 3, "place": "Dallas", "lat": 32.77878544177923, "lon": -96.82922422969209}
+        {"id": 3, "place": "Dallas", "lat": 32.77878544177923, "lon": -96.82922422969209},
+        {"id": 4, "place": "Hometown", "lat": 38.303996, "lon": -89.605453}
+        
     ]
 }
