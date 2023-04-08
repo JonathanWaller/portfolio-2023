@@ -8,7 +8,7 @@ import Heading from "./shared/Heading";
 import { breakpoints } from "../styles/breakpoints";
 import { gray, white, black, darkGray } from "../styles/colors";
 
-import { greenwoodImages, restayImages } from "../utils/common";
+import { greenwoodImages, restayImages, beakImages } from "../utils/common";
 
 const Container = styled.div`
     width: 100%;
@@ -221,10 +221,12 @@ const FeatureImageContainer = styled.div`
     overflow: hidden;
 
     border: 1px solid green;
-    // height: 42vh;
-    // height: 50vh;
     height: auto;
     width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     // background-size: contain;
 
@@ -251,14 +253,20 @@ const FeatureImageContainer = styled.div`
 `
 
 const StyledImage = styled.img`
-    // max-height: 100%;
+    // background-size: contain;
     // max-width: 100%;
-    // object-fit: contain;
-    background-size: contain;
+    // height: auto;
 
-    max-width: 100%;
+    // margin-top: 30px;
+    // border: 3px solid black;
+    border-radius: 8px;
+    width: 100%;
     height: auto;
-    // display: block;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+
+    @media (max-width: ${breakpoints.md}px) {
+        margin-top: 0;
+    }
 
     image-rendering: -moz-crisp-edges;
     /* Firefox */
@@ -476,7 +484,7 @@ const Projects: React.FC<Props> = ({viewRef}) => {
         }
     }, [] )
 
-    console.log('GW IMAGES: ', greenwoodImages)
+    // console.log('GW IMAGES: ', greenwoodImages)
 
     return(
         <>
@@ -495,10 +503,10 @@ const Projects: React.FC<Props> = ({viewRef}) => {
                         </FeatureTypeTag>
                     </FeatureTypeTagRainbowContainer>
                     <FeatureHeaderText>
-                        DeFi tool
+                        Web3 Support Tool
                     </FeatureHeaderText>
                     <FeatureSubheaderText>
-                        Greenwood allows DeFi users to borrow cyrptocurrency using owned tokens as collateral. 
+                        Customer support plaform helping Web3 teams automate and resolve support requests at scale
                     </FeatureSubheaderText>
                 </FeatureTextContainer>
                 <FeatureTextContainer id="feature-2">
@@ -557,8 +565,8 @@ const Projects: React.FC<Props> = ({viewRef}) => {
                         <source src={featureVideo2MP4} type="video/mp4"/>
                     </FeatureVideo> */}
                     <FeatureImageContainer>
-                        <LeftArrow dark  onClick={()=>handleNavigate( 'restay', test2('restay', 'left') )}/>
-                        <RightArrow dark onClick={()=>handleNavigate( 'restay', test2('restay', 'right'))} />
+                        <LeftArrow dark={true}  onClick={()=>handleNavigate( 'restay', test2('restay', 'left') )}/>
+                        <RightArrow dark={true} onClick={()=>handleNavigate( 'restay', test2('restay', 'right'))} />
                         <StyledImage
                             src={restayImages[restay].src}
                             alt="restay img"

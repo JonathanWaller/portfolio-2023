@@ -34,7 +34,16 @@ const gwLoans = require('../assets/images/greenwood/greenwood-loans.png');
 const gwChart = require('../assets/images/greenwood/greenwood-chart.png');
 const gwBorrow = require('../assets/images/greenwood/greenwood-borrow.png');
 
+const gwFeature1 = require('../assets/images/greenwood/gw-feature-1.png')
+const gwFeature2 = require('../assets/images/greenwood/gw-feature-2.png')
+const gwFeature3 = require('../assets/images/greenwood/gw-feature-3.png')
 
+// beaker
+const beak1 = require('../assets/images/greenwood/beak-1.png')
+const beak2 = require('../assets/images/greenwood/beak-2.png')
+const beak3 = require('../assets/images/greenwood/beak-3.png')
+const beak4 = require('../assets/images/greenwood/beak-4.png')
+const beak5 = require('../assets/images/greenwood/beak-5.png')
 
 //restay
 const restaySplash = require('../assets/images/restay/splash.png');
@@ -42,11 +51,17 @@ const restayProperties = require('../assets/images/restay/properties.png');
 const restayLoft = require('../assets/images/restay/property.png');
 const restayDetails = require('../assets/images/restay/property2.png');
 
+// export const greenwoodImages: Image[] = [
+//     { id: 1, src: gwLoans},
+//     // { id: 1, src: '../../'},
+//     { id: 2, src: gwChart},
+//     {id: 3, src: gwBorrow}
+// ]
+
 export const greenwoodImages: Image[] = [
-    { id: 1, src: gwLoans},
-    // { id: 1, src: '../../'},
-    { id: 2, src: gwChart},
-    {id: 3, src: gwBorrow}
+    { id: 1, src: gwFeature2},
+    { id: 2, src: gwFeature3},
+    {id: 3, src: gwFeature1}
 ]
 
 export const restayImages: Image[] = [
@@ -54,4 +69,12 @@ export const restayImages: Image[] = [
     {id: 2, src: restayProperties},
     {id: 3, src: restayLoft},
     {id: 4, src: restayDetails}
+]
+
+export const beakImages: Image[] = [
+    {id: 1, src: beak1},
+    {id: 2, src: beak2},
+    {id: 3, src: beak3},
+    {id: 4, src: beak4},
+    {id: 5, src: beak5}
 ]

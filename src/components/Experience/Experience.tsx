@@ -21,8 +21,14 @@ const Container = styled.div`
 `
 
 const LocationContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     border: 1px solid green;
     width: 50%;
+
 `
 
 interface Props {
@@ -38,12 +44,12 @@ const Experience: React.FC<Props> = ({viewRef}) => {
         <>
         <Heading headingText="About me" />
         <Container ref={viewRef} >
-            {/* <div style={{width: '50%'}}> */}
+            <div style={{width: '60%'}}>
             <Home 
                 selectedLocation={selectedLocation}
                 setSelectedLocation={setSelectedLocation}
             />
-            {/* </div> */}
+            </div>
 
             {/* {
                 mapLocations.map((loc: any ) => (
@@ -51,20 +57,48 @@ const Experience: React.FC<Props> = ({viewRef}) => {
                 ))
             } */}
 
-            {/* <LocationContainer>
+            <LocationContainer>
                 {
                     selectedLocation
                     ?
                     <>
                     <h2>{ selectedLocation?.place}</h2>
                     <div>
-                        { locationDetails( selectedLocation?.id)}
+                        {/* { locationDetails( selectedLocation?.id)} */}
+                        {
+                            selectedLocation.place === 'New York City'
+                            ?
+                            <>
+                                <div>My current location</div>
+                                <div>
+                                    I'm currently based out of NYC (Brooklyn), where I work for a Web3 tech startup, 
+                                    providing architectural direction on a variety of products. 
+                                </div>
+                            </>
+                            : selectedLocation.place === 'Hometown'
+                            ?
+                            <>
+                                <div>My hometown</div>
+                                <div>
+                                    I'm born and raised in southern Illinois, about an hour southeast of St. Louis, MO. Go Cardinals!
+                                </div>
+                            </>
+                            :
+                            <>
+                                <div>Previous Location</div>
+                                <div>
+                                    Prior to moving to NYC, I lived in Dallas, TX for about 5 years. While in Dallas, I began my software 
+                                    development career before evolving int a Team Lead. 
+                                </div>
+                            </>
+                        }
+
                     </div>
                     </>
                     : null
                 }
                 
-            </LocationContainer> */}
+            </LocationContainer>
             
 
         </Container>
