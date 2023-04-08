@@ -8,7 +8,7 @@ import Heading from "./shared/Heading";
 import { breakpoints } from "../styles/breakpoints";
 import { gray, white, black, darkGray } from "../styles/colors";
 
-import { greenwoodImages, restayImages, beakImages } from "../utils/common";
+import { greenwoodImages, restayImages, beakImages, runningImages } from "../utils/common";
 
 const Container = styled.div`
     width: 100%;
@@ -339,10 +339,11 @@ const Projects: React.FC<Props> = ({viewRef}) => {
     const [imageVisible, setImageVisible] = useState<'1' | '2' | '3' | '4' | null>(null);
     const [ imageState, setImageState ] = useState<{[key: string]: number}>({
         greenwood: 0,
-        restay: 0
+        restay: 0,
+        running: 0
     })
 
-    const { greenwood, restay } = imageState;
+    const { greenwood, restay, running } = imageState;
 
     const test2 = (name: string, direction: 'left' | 'right') => {
         
@@ -352,6 +353,8 @@ const Projects: React.FC<Props> = ({viewRef}) => {
                     return [imageState.greenwood, greenwoodImages.length]
                 case 'restay':
                     return [imageState.restay, restayImages.length];
+                case 'running':
+                    return [imageState.running, runningImages.length]
                 default: 
                     return [];
             }
@@ -509,6 +512,7 @@ const Projects: React.FC<Props> = ({viewRef}) => {
                         Customer support plaform helping Web3 teams automate and resolve support requests at scale
                     </FeatureSubheaderText>
                 </FeatureTextContainer>
+
                 <FeatureTextContainer id="feature-2">
                     <FeatureTypeTagRainbowContainer>
                         <FeatureTypeTag 
@@ -527,16 +531,18 @@ const Projects: React.FC<Props> = ({viewRef}) => {
                         airbnb-like resource to book short-term rentals
                     </FeatureSubheaderText>
                 </FeatureTextContainer>
+
                 <FeatureTextContainer id="feature-3">
                     <FeatureTypeTagRainbowContainer>
-                        <FeatureTypeTag>Make better decisions</FeatureTypeTag>
+                        <FeatureTypeTag>Running</FeatureTypeTag>
                     </FeatureTypeTagRainbowContainer>
                     <FeatureHeaderText>
-                        Know your costs, invest confidently
+                        Visualizing my runs
                     </FeatureHeaderText>
                     <FeatureSubheaderText>
-                        Greenwood simulates depositing and withdrawing on DeFi protocols to calculate gas costs and expected returns before you invest.
+                        D3.js visualization displaying my run data over the past several years
                     </FeatureSubheaderText>
+
                 </FeatureTextContainer>
                 <FeatureTextContainer id="feature-4">
                     <FeatureTypeTagRainbowContainer>
@@ -574,12 +580,23 @@ const Projects: React.FC<Props> = ({viewRef}) => {
                         {/* <StyledImage color={greenwoodImages[restay].src }></StyledImage> */}
                     </FeatureImageContainer>
                 </FeatureImageWrapper>
+
                 <FeatureImageWrapper style={{opacity: imageVisible === '3' ? 1 : 0 }}>
-                    <FeatureVideo  id="feature-3-video" muted>
-                        {/* <source src={featureVideo3WEBM} type="video/webm"/>
-                        <source src={featureVideo3MP4} type="video/mp4"/> */}
-                    </FeatureVideo>
+                    <FeatureImageContainer>
+                        <LeftArrow dark={true}  onClick={()=>handleNavigate( 'running', test2('running', 'left') )}/>
+                        <RightArrow dark={true} onClick={()=>handleNavigate( 'running', test2('running', 'right'))} />
+                        <StyledImage
+                            src={runningImages[running].src}
+                            alt="running img"
+                        /> 
+                        {/* <StyledImage
+                            // src={require('../assets/images/running/ruuning-all.png')}
+                            src={runningImages[0]}
+                            alt=''
+                        /> */}
+                    </FeatureImageContainer>
                 </FeatureImageWrapper>
+
                 <FeatureImageWrapper style={{opacity: imageVisible === '4' ? 1 : 0 }}>
                     <FeatureVideo  id="feature-4-video" muted>
                         {/* <source src={featureVideo4WEBM} type="video/webm"/>
