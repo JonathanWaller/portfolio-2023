@@ -51,6 +51,11 @@ const restayProperties = require('../assets/images/restay/properties.png');
 const restayLoft = require('../assets/images/restay/property.png');
 const restayDetails = require('../assets/images/restay/property2.png');
 
+// running 
+const runningAll = require('../assets/images/running/running-all.png');
+const runningYear = require('../assets/images/running/running-year.png');
+const runningViz = require('../assets/images/running/running-viz.gif');
+
 // export const greenwoodImages: Image[] = [
 //     { id: 1, src: gwLoans},
 //     // { id: 1, src: '../../'},
@@ -77,4 +82,11 @@ export const beakImages: Image[] = [
     {id: 3, src: beak3},
     {id: 4, src: beak4},
     {id: 5, src: beak5}
+]
+
+export const runningImages: any[] = [
+    {id: 1, src: runningViz},
+    {id: 2, src: runningAll},
+    {id: 3, src: runningYear},
+    
 ]
