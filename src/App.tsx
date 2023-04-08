@@ -40,7 +40,7 @@ const App = () => {
       <Nav handleClickScroll={handleClickScroll}/>
       <Container>
         <div id='intro'><Intro /></div>
-        <div id="experience"><Experience viewRef={viewRef} /></div>
+        {/* <div id="experience"><Experience viewRef={viewRef} /></div> */}
         <div id="projects"><Projects viewRef={viewRef}/></div>
         <div id="contact"><Contact /></div>
       </Container>
