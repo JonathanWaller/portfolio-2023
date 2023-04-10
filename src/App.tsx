@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Nav from './components/Nav';
 import Intro from './components/Intro';
 import Experience from './components/Experience/Experience';
+import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 
@@ -41,6 +42,7 @@ const App = () => {
       <Container>
         <div id='intro'><Intro /></div>
         {/* <div id="experience"><Experience viewRef={viewRef} /></div> */}
+        <div id='about'><About /></div>
         <div id="projects"><Projects viewRef={viewRef}/></div>
         <div id="contact"><Contact /></div>
       </Container>

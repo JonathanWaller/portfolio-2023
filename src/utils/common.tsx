@@ -1,11 +1,12 @@
 // types
-import { Image } from '../types/projects';
+import { Image, Project, ProjectImage } from '../types/projects';
 import { MapLocation } from '../types/map';
 
 // ** Nav
 export const navSections: {[key: string]: string}[] = [
     { display: 'About', section: 'about'},
-    { display: 'Experience', section: 'experience' },
+    // { display: 'Experience', section: 'experience' },
+    // { display: ''}
     { display: 'Projects', section: 'projects'},
     {display: 'Contact', section: 'contact'}
 ]
@@ -30,9 +31,9 @@ export const mapLocations: MapLocation[] = [
 // ** project images
 
 // greenwood
-const gwLoans = require('../assets/images/greenwood/greenwood-loans.png');
-const gwChart = require('../assets/images/greenwood/greenwood-chart.png');
-const gwBorrow = require('../assets/images/greenwood/greenwood-borrow.png');
+// const gwLoans = require('../assets/images/greenwood/greenwood-loans.png');
+// const gwChart = require('../assets/images/greenwood/greenwood-chart.png');
+// const gwBorrow = require('../assets/images/greenwood/greenwood-borrow.png');
 
 const gwFeature1 = require('../assets/images/greenwood/gw-feature-1.png')
 const gwFeature2 = require('../assets/images/greenwood/gw-feature-2.png')
@@ -90,3 +91,75 @@ export const runningImages: any[] = [
     {id: 3, src: runningYear},
     
 ]
+
+export const projects: Project[] = [
+    {
+        textId: "feature-1",
+        url: "https://github.com/greenwood-labs/kovan-greenwood-v2-interface",
+        name: 'Greenwood',
+        header: 'Web3 Support Tool',
+        description: 'Customer support plaform helping Web3 teams automate and resolve support requests at scale'
+    },
+    {
+        textId: "feature-2",
+        url: "https://github.com/JonathanWaller/Personal_Project-Rentals",
+        name: 'Restay',
+        header: 'Welcome home',
+        description: 'airbnb-like resource to book short-term rentals'
+    },
+    {
+        textId: "feature-3",
+        url: "https://observablehq.com/d/2aaf47675945b9c2",
+        name: 'Running',
+        header: 'Visualizing my runs',
+        description: 'D3.js visualization displaying my run data over the past several years'
+    },
+    // {
+    //     textId: "feature-4",
+    //     url: "https://observablehq.com/d/2aaf47675945b9c2",
+    //     name: 'Have peace of mind',
+    //     header: 'If you have a problem, we find a solution',
+    //     description: 'Greenwood works directly with DeFi protocol teams to quickly and effectively resolve any technical problems you experience.'
+    // }
+]
+
+export const projectImagesDesktop: ProjectImage[] = [
+    {
+        id: '1',
+        name: 'greenwood',
+        imgSrc: greenwoodImages,
+        altName: 'Greenwood Labs',
+    },
+    {
+        id: '2',
+        name: 'restay',
+        imgSrc: restayImages,
+        altName: 'restay img',
+    },
+    {
+        id: '3',
+        name: 'running',
+        imgSrc: runningImages,
+        altName: 'running img',
+    }
+]
+
+export const projectImagesMobile = [
+    {
+        id: '1',
+        imgSrc: greenwoodImages[0].src,
+        altName: 'Greenwood Labs'
+    },
+    {
+        id: '2',
+        imgSrc: restayImages[0].src,
+        altName: 'restay img'
+    },
+    {
+        id: '3',
+        imgSrc: runningImages[0].src,
+        altName: 'running img'
+    }
+]
+
+export const projectMobile = projects.reduce( (acc:any,curr: Project,ind: number) => [...acc, {...curr, ...projectImagesMobile[ind]}] , [])

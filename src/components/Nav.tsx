@@ -4,6 +4,8 @@ import styled from 'styled-components';
 
 import { navSections } from '../utils/common';
 
+import { darkGray } from '../styles/colors';
+
 const Container = styled.div`
     display: flex;
     align-items: center;
@@ -36,7 +38,8 @@ const Popover = styled.div<{open: boolean}>`
     min-width: 6rem;
     padding: .5rem;
     background: transparent;
-    color: #FFFFFF;
+    // color: #FFFFFF;
+    color: ${darkGray};
     backdrop-filter: blur(5px) contrast(.8);
     border-radius: 4px;
 `
@@ -50,10 +53,10 @@ const List = styled.div`
 
 const ListItem = styled.div`
     padding: 0.5em;
-    border-bottom: 1px solid #7A7A7A;
 
     &:hover {
         cursor: pointer;
+        text-decoration: underline;
     }
 `
 
