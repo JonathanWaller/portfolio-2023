@@ -1,30 +1,40 @@
 import React from "react";
 import { motion } from "framer-motion";
-
-// import { black } from '../styles/colors'
+import styled from "styled-components";
+import useWindowWidth from "react-hook-use-window-width";
+import {breakpoints} from '../styles/breakpoints';
 
 interface Props {
-    // text: any
     children: any;
 }
 
 // Word wrapper
 const Wrapper: React.FC<Props> = (props:any) => {
-  // We'll do this to prevent wrapping of words using CSS
+  // Do this to prevent wrapping of words using CSS
   return <span className="word-wrapper">{props.children}</span>;
 };
 
-// Map API "type" vaules to JSX tag names
-const tagMap: any = {
-  paragraph: "p",
-  heading1: "h1",
-  heading2: "h2"
-};
+const Text = styled.div`
+  @media (max-width: ${breakpoints.md}px) { 
+    font: 4px;
+  }
+`
 
 // AnimatedCharacters
 // Handles the deconstruction of each word and character to setup for the
 // individual character animations
 const AnimatedCharacters = (props: any) => {
+
+  const width = useWindowWidth();
+
+  // Map API "type" vaules to JSX tag names
+  const tagMap: any = {
+    paragraph: "p",
+    // heading1: "h1",
+    heading1: width < breakpoints.md ? 'h2' : 'h1',
+    heading2: "h2"
+  };
+
   // Framer Motion variant object, for controlling animation
   const item = {
     hidden: {
@@ -70,7 +80,7 @@ const AnimatedCharacters = (props: any) => {
                 <span
                   style={{
                     overflow: "hidden",
-                    display: "inline-block"
+                    display: "inline-block",
                   }}
                   key={index}
                 >
@@ -78,7 +88,9 @@ const AnimatedCharacters = (props: any) => {
                     style={{ display: "inline-block" }}
                     variants={item}
                   >
-                    {element}
+                    <Text>
+                      {element}
+                    </Text>
                   </motion.span>
                 </span>
               );
@@ -86,7 +98,6 @@ const AnimatedCharacters = (props: any) => {
           </Wrapper>
         );
       })}
-      {/* {} */}
     </Tag>
   );
 };

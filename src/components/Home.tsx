@@ -1,10 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import * as d3 from "d3";
-// import { geoPath, geoOrthographic } from 'd3-geo'
-// import * as topojson from 'topojson';
 
 import { Coordinate } from '../types/map';
-
 import {useContainerDimensions} from '../hooks/useContainerDimensions';
 
 interface Props {
@@ -35,13 +32,13 @@ const Home: React.FC<Props> = ({selectedLocation, setSelectedLocation }) => {
     height = 500;
 
 
-    const handleMouseOver = ( element: any, d: any ) => {
-        if( selectedLocation.id === d.id ) {
-            return d3.select( element.currentTarget ).style( 'cursor', 'default' );
-        } else {
-            return d3.select( element.currentTarget ).style( 'cursor', 'pointer' )
-        }
-    }
+    // const handleMouseOver = ( element: any, d: any ) => {
+    //     if( selectedLocation.id === d.id ) {
+    //         return d3.select( element.currentTarget ).style( 'cursor', 'default' );
+    //     } else {
+    //         return d3.select( element.currentTarget ).style( 'cursor', 'pointer' )
+    //     }
+    // }
 
     const projection = d3.geoAlbersUsa()
         // .translate([width/2, height/2])
@@ -94,13 +91,35 @@ const Home: React.FC<Props> = ({selectedLocation, setSelectedLocation }) => {
     // Map the cities I've lived
     if( cities?.features && selectedLocation) {
         const { features } = cities;
+        svg.selectAll("circle")
+        .data(features)
+        .enter()
+        .append('text')
+        .text((d:any) => d.place)
+        .attr("x", function(d:any) {
+            // @ts-ignore
+            return projection([d.lon, d.lat])[0];
+        })
+        .attr("y", function(d:any) {
+            // @ts-ignore
+            return projection([d.lon, d.lat])[1];
+        })
+        .style("fill", ( d: any ) => d.id === selectedLocation.id ? "red" : 'black')
+        // .style("opacity", (d:any) => d.place === "Home" ? 0 : 0.85)
+        .style("opacity", (d:any) => d.place === "Home" ? 0 : 1)
+        .style("font-size", '8px')
+    }
+
+    if( cities?.features && selectedLocation) {
+        const { features } = cities;
         // console.log('SOOOOO', cities)
         svg.selectAll("circle")
         .data(features)
         .enter()
         .append('circle')
+        // .append('text')
+        // .text('hello')
         .attr("cx", function(d:any) {
-            // console.log('LONGITUDE: ', d)
             // @ts-ignore
             return projection([d.lon, d.lat])[0];
         })
@@ -108,18 +127,21 @@ const Home: React.FC<Props> = ({selectedLocation, setSelectedLocation }) => {
             // @ts-ignore
             return projection([d.lon, d.lat])[1];
         })
-        .attr("r", (d:any) => d.place === "Home" ? 12 : 4 )	
+
+        // .attr("r", (d:any) => d.place === "Home" ? 12 : 4 )	
+        .attr("r", 3.5)	
         // .style("fill", ( d: any ) => d.place === 'Home' ? "red" : "blue")
-        .style("fill", ( d: any ) => d.id === selectedLocation.id ? "red" : 'blue')
-        .style("opacity", (d:any) => d.place === "Home" ? .4 : 0.85)
+        .style("fill", 'red')
+        // .style("opacity", (d:any) => d.place === "Home" ? .4 : 0)
+        .style("opacity", (d:any) => d.place === "Home" ? .8 : 0)
         
 
-        .on('mouseover', ( element, d ) => handleMouseOver( element, d)) 
-        .on("click", function(d) {      
-            // console.log('PLACE: ', d.target.__data__)
-            setSelectedLocation( d.target.__data__)
+        // .on('mouseover', ( element, d ) => handleMouseOver( element, d)) 
+        // .on("click", function(d) {      
+        //     // console.log('PLACE: ', d.target.__data__)
+        //     setSelectedLocation( d.target.__data__)
             
-        })   
+        // })   
         
     }
 

@@ -1,40 +1,38 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-
 import { ArrowLeft, ArrowRight, GitHub } from "react-feather";
+import useWindowWidth from "react-hook-use-window-width";
 
 import Heading from "./shared/Heading";
 
 import { breakpoints } from "../styles/breakpoints";
 import { gray, white, black, darkGray } from "../styles/colors";
 
-import { greenwoodImages, restayImages, beakImages, runningImages } from "../utils/common";
+import { greenwoodImages, restayImages, runningImages, projects, projectMobile } from "../utils/common";
+import { Project, ProjectImage } from "../types/projects";
 
 const Container = styled.div`
     width: 100%;
-
     display: flex;
     justify-content: space-between;
     align-items: start;
 
-    border: 1px solid pink;
-
     @media (max-width: ${breakpoints.md}px) {
         flex-direction: column;
-        // gap: 200px;
-        padding-top: 200px;
-        padding-bottom: 200px;
+        // padding-top: 200px;
+        // padding-bottom: 200px;
     }
 `
 
 const FeatureTextColumn = styled.div`
     display: flex;
     flex-direction: column;
-    flex-basis: 45%;
-
+    flex-basis: 43%;
     gap: 500px;
     padding-top: 350px;
     padding-bottom: 350px;
+    padding-right: 10px;
+    border: 1px solid red;
 `
 
 const FeatureTextContainer = styled.div`
@@ -161,6 +159,23 @@ const FeatureImageWrapper = styled.div`
     border: 1px solid red;
 `
 
+const MobileProjectContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+`
+
+const MobileGroup = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 20px;
+
+    &:last-child {
+        padding-bottom: 0;
+    }
+`
+
 // const FeatureImage = styled.img`
 //     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.07);
 //     border-radius: 11px;
@@ -186,34 +201,6 @@ const FeatureImageWrapper = styled.div`
 //         height: auto;
 //     }
 // `
-
-const FeatureVideo = styled.video`
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.07);
-    border-radius: 11px;
-    overflow: hidden;
-
-    border: 1px solid blue;
-
-    height: 60vh;
-    width: auto;
-
-    @media (max-width: ${breakpoints.xl}px) {
-        height: 50vh;
-    }
-    @media (max-width: ${breakpoints.lg}px) {
-        height: 45vh;
-    }
-
-    @media (max-width: ${breakpoints.md}px) {
-        width: 50vw;
-        height: auto;
-    }
-
-    @media (max-width: ${breakpoints.sm}px) {
-        width: 65vw;
-        height: auto;
-    }
-`
 
 const FeatureImageContainer = styled.div`
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.07);
@@ -277,38 +264,6 @@ const StyledImage = styled.img`
     image-rendering: crisp-edges;
 `
 
-// const StyledImage = styled.div`
-//     // max-height: 100%;
-//     // max-width: 100%;
-//     // object-fit: contain;
-
-//     // width: 250px;
-//     // height: 300px;
-
-//     width: 100%;
-//     height: 100%;
-
-//     background-image: url(${ props => props.color });
-
-//     background-size: contain;
-//     background-repeat: no-repeat;
-//     background-position: 50% 50%;
-// `
-
-const StatusTag = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 5px 10px;
-    gap: 10px;
-    height: 35px;
-    border-radius: 6px;
-    width: fit-content;
-
-    color: red;
-    background: ${ props => props.color };
-`
-
 const LeftArrow = styled(ArrowLeft)<{dark?: boolean}>`
     color: ${({dark}) => dark ? `${black}` : `${gray}`};
     position: absolute;
@@ -336,6 +291,7 @@ interface Props {
 }
 
 const Projects: React.FC<Props> = ({viewRef}) => {
+    const width = useWindowWidth();
     const [imageVisible, setImageVisible] = useState<'1' | '2' | '3' | '4' | null>(null);
     const [ imageState, setImageState ] = useState<{[key: string]: number}>({
         greenwood: 0,
@@ -344,6 +300,31 @@ const Projects: React.FC<Props> = ({viewRef}) => {
     })
 
     const { greenwood, restay, running } = imageState;
+
+
+
+    const projectImagesDesktop: ProjectImage[] = [
+        {
+            id: '1',
+            name: 'greenwood',
+            imgSrc: greenwoodImages[greenwood].src,
+            altName: 'Greenwood Labs',
+        },
+        {
+            id: '2',
+            name: 'restay',
+            imgSrc: restayImages[restay].src,
+            altName: 'restay img',
+        },
+        {
+            id: '3',
+            name: 'running',
+            imgSrc: runningImages[running].src,
+            altName: 'running img',
+        }
+    ]
+
+
 
     const test2 = (name: string, direction: 'left' | 'right') => {
         
@@ -374,50 +355,32 @@ const Projects: React.FC<Props> = ({viewRef}) => {
             } else {
                 return state + 1
             }
-        }
-        
+        }        
     }
 
-
     const handleNavigate = (loc: string, num: number ) => {
-        
         setImageState( {
             ...imageState,
             [loc]: num
         })
     }
 
-    // const handleNavigate = (loc: string, direction: 'left' | 'right') => {
-    //     // console.log('HERE: ', eval(`${loc}Images`))
-    //     console.log('HERE: ', greenwoodImages)
-    //     // console.log('HERE: ', restayImages)
-    //     if( direction === 'left' ) {
-    //         setImageState( {
-    //             ...imageState,
-    //             [loc]: imageState[loc] === 0 ? eval(`${loc}Images`).length -1 :  imageState[loc] - 1
-    //         })
-    //     } else {
-    //         setImageState( {
-    //             ...imageState,
-    //             [loc]: eval(`${loc}Images`).length -1 === imageState[loc] ? 0 : imageState[loc] + 1
-    //         })
-    //     }
-    // }
-
     useEffect( ( ) => {
         let featureTextColumn = document.getElementById( 'feature-text-column' )
         let feature1 = document.getElementById( 'feature-1' )
         let feature2 = document.getElementById( 'feature-2' )
         let feature3 = document.getElementById( 'feature-3' )
-        let feature4 = document.getElementById( 'feature-4' )
+        // let feature4 = document.getElementById( 'feature-4' )
 
         let featureVideo1 = document.getElementById( 'feature-1-video' ) as HTMLVideoElement
         let featureVideo2 = document.getElementById( 'feature-2-video' ) as HTMLVideoElement
         let featureVideo3 = document.getElementById( 'feature-3-video' ) as HTMLVideoElement
-        let featureVideo4 = document.getElementById( 'feature-4-video' ) as HTMLVideoElement
+        // let featureVideo4 = document.getElementById( 'feature-4-video' ) as HTMLVideoElement
 
 
-        if (feature1 && feature2 && feature3 && feature4) {
+        if (feature1 && feature2 && feature3 
+            // && feature4
+        ) {
 
             let feature1Observer = new IntersectionObserver((entries) => {
                 if(entries[0].isIntersecting) {
@@ -452,21 +415,21 @@ const Projects: React.FC<Props> = ({viewRef}) => {
                 }
             }, {threshold: 0.5})
 
-            let feature4Observer = new IntersectionObserver((entries) => {
-                if(entries[0].isIntersecting) {
-                    setImageVisible('4')
-                    featureVideo4.pause()
-                    featureVideo4.currentTime = 0
-                    setTimeout(() => {
-                        featureVideo4.play()
-                    }, 450)
-                }
-            }, {threshold: 0.5})
+            // let feature4Observer = new IntersectionObserver((entries) => {
+            //     if(entries[0].isIntersecting) {
+            //         setImageVisible('4')
+            //         featureVideo4.pause()
+            //         featureVideo4.currentTime = 0
+            //         setTimeout(() => {
+            //             featureVideo4.play()
+            //         }, 450)
+            //     }
+            // }, {threshold: 0.5})
 
             feature1Observer.observe(feature1)
             feature2Observer.observe(feature2)
             feature3Observer.observe(feature3)
-            feature4Observer.observe(feature4)
+            // feature4Observer.observe(feature4)
         }   
         
 
@@ -487,123 +450,71 @@ const Projects: React.FC<Props> = ({viewRef}) => {
         }
     }, [] )
 
-    // console.log('GW IMAGES: ', greenwoodImages)
-
     return(
         <>
         <Heading headingText="Projects" />
         <Container>
-            <FeatureTextColumn id="feature-text-column">
-                <FeatureTextContainer id="feature-1">
-                    <FeatureTypeTagRainbowContainer>
-                        <FeatureTypeTag
-                            target="_blank" 
-                            rel="noreferrer"
-                            href="https://github.com/greenwood-labs/kovan-greenwood-v2-interface"
-                        >
-                            Greenwood
-                            <StyledGithub />
-                        </FeatureTypeTag>
-                    </FeatureTypeTagRainbowContainer>
-                    <FeatureHeaderText>
-                        Web3 Support Tool
-                    </FeatureHeaderText>
-                    <FeatureSubheaderText>
-                        Customer support plaform helping Web3 teams automate and resolve support requests at scale
-                    </FeatureSubheaderText>
-                </FeatureTextContainer>
+            {
+                width > breakpoints.md
+                ?
+                <>
+                <FeatureTextColumn id="feature-text-column">
+                    {
+                        projects.map( ({textId,url, name, header, description }: Project, index: number) => (
+                            <FeatureTextContainer id={textId}>
+                                <FeatureTypeTagRainbowContainer>
+                                    <FeatureTypeTag target="_blank" rel="noreferrer" href={url}>
+                                        {name}
+                                        <StyledGithub />
+                                    </FeatureTypeTag>
+                                </FeatureTypeTagRainbowContainer>
+                                <FeatureHeaderText>{header}</FeatureHeaderText>
+                                <FeatureSubheaderText>{description}</FeatureSubheaderText>
+                            </FeatureTextContainer>
+                        ))
+                    }
+                </FeatureTextColumn>
+                <FeatureImageSection>
+                    {
+                        projectImagesDesktop.map( ({id, name, imgSrc, altName}: ProjectImage, index: number ) => (
+                            <FeatureImageWrapper style={{opacity: imageVisible === id ? 1 : 0 }} key={id}>
+                                <FeatureImageContainer>
+                                    <LeftArrow onClick={()=>handleNavigate( name, test2(name, 'left') )}/>
+                                    <RightArrow onClick={()=>handleNavigate( name, test2(name, 'right') )} />
+                                    <StyledImage src={imgSrc} alt={altName} /> 
+                                </FeatureImageContainer>
+                            </FeatureImageWrapper>
+                        ))
+                    }
+                </FeatureImageSection>
+                </>
+                : 
+                <MobileProjectContainer>
+                {
+                    projectMobile.map( ({textId, url, name, header, description, id, imgSrc, altName}: any ) => (
+                        <MobileGroup key={id}>
+                            <FeatureTextContainer id={textId}>
+                                <FeatureTypeTagRainbowContainer>
+                                    <FeatureTypeTag target="_blank" rel="noreferrer" href={url}>
+                                        {name}
+                                        <StyledGithub />
+                                    </FeatureTypeTag>
+                                </FeatureTypeTagRainbowContainer>
+                                <FeatureHeaderText>{header}</FeatureHeaderText>
+                                <FeatureSubheaderText>{description}</FeatureSubheaderText>
+                            </FeatureTextContainer>
 
-                <FeatureTextContainer id="feature-2">
-                    <FeatureTypeTagRainbowContainer>
-                        <FeatureTypeTag 
-                            target="_blank" 
-                            rel="noreferrer"
-                            href="https://github.com/JonathanWaller/Personal_Project-Rentals"
-                        >
-                            Restay
-                            <StyledGithub />
-                        </FeatureTypeTag>
-                    </FeatureTypeTagRainbowContainer>
-                    <FeatureHeaderText>
-                        Welcome home
-                    </FeatureHeaderText>
-                    <FeatureSubheaderText>
-                        airbnb-like resource to book short-term rentals
-                    </FeatureSubheaderText>
-                </FeatureTextContainer>
+                            <StyledImage 
+                                src={imgSrc}
+                                alt={altName}
+                            />
+                        </MobileGroup>
+                    ))
+                }
+                </MobileProjectContainer>
+            }
 
-                <FeatureTextContainer id="feature-3">
-                    <FeatureTypeTagRainbowContainer>
-                        <FeatureTypeTag>Running</FeatureTypeTag>
-                    </FeatureTypeTagRainbowContainer>
-                    <FeatureHeaderText>
-                        Visualizing my runs
-                    </FeatureHeaderText>
-                    <FeatureSubheaderText>
-                        D3.js visualization displaying my run data over the past several years
-                    </FeatureSubheaderText>
-
-                </FeatureTextContainer>
-                <FeatureTextContainer id="feature-4">
-                    <FeatureTypeTagRainbowContainer>
-                        <FeatureTypeTag>Have peace of mind</FeatureTypeTag>
-                    </FeatureTypeTagRainbowContainer>
-                    <FeatureHeaderText>
-                        If you have a problem, we find a solution
-                    </FeatureHeaderText>
-                    <FeatureSubheaderText>
-                        Greenwood works directly with DeFi protocol teams to quickly and effectively resolve any technical problems you experience.
-                    </FeatureSubheaderText>
-                </FeatureTextContainer>
-            </FeatureTextColumn>
-            <FeatureImageSection>
-                <FeatureImageWrapper style={{opacity: imageVisible === '1' ? 1 : 0 }}>
-                    <FeatureImageContainer>
-                        <LeftArrow onClick={()=>handleNavigate( 'greenwood', test2('greenwood', 'left') )}/>
-                        <RightArrow onClick={()=>handleNavigate( 'greenwood', test2('greenwood', 'right') )} />
-                        <StyledImage src={greenwoodImages[greenwood].src} alt="Greenwood Loans" /> 
-                        {/* <StyledImage color={greenwoodImages[restay].src }></StyledImage> */}
-                    </FeatureImageContainer>
-                </FeatureImageWrapper>
-                <FeatureImageWrapper style={{opacity: imageVisible === '2' ? 1 : 0 }}>
-                    {/* <FeatureVideo id="feature-2-video" muted>
-                        <source src={featureVideo2WEBM} type="video/webm"/>
-                        <source src={featureVideo2MP4} type="video/mp4"/>
-                    </FeatureVideo> */}
-                    <FeatureImageContainer>
-                        <LeftArrow dark={true}  onClick={()=>handleNavigate( 'restay', test2('restay', 'left') )}/>
-                        <RightArrow dark={true} onClick={()=>handleNavigate( 'restay', test2('restay', 'right'))} />
-                        <StyledImage
-                            src={restayImages[restay].src}
-                            alt="restay img"
-                        /> 
-                        {/* <StyledImage color={greenwoodImages[restay].src }></StyledImage> */}
-                    </FeatureImageContainer>
-                </FeatureImageWrapper>
-
-                <FeatureImageWrapper style={{opacity: imageVisible === '3' ? 1 : 0 }}>
-                    <FeatureImageContainer>
-                        <LeftArrow dark={true}  onClick={()=>handleNavigate( 'running', test2('running', 'left') )}/>
-                        <RightArrow dark={true} onClick={()=>handleNavigate( 'running', test2('running', 'right'))} />
-                        <StyledImage
-                            src={runningImages[running].src}
-                            alt="running img"
-                        /> 
-                        {/* <StyledImage
-                            // src={require('../assets/images/running/ruuning-all.png')}
-                            src={runningImages[0]}
-                            alt=''
-                        /> */}
-                    </FeatureImageContainer>
-                </FeatureImageWrapper>
-
-                <FeatureImageWrapper style={{opacity: imageVisible === '4' ? 1 : 0 }}>
-                    <FeatureVideo  id="feature-4-video" muted>
-                        {/* <source src={featureVideo4WEBM} type="video/webm"/>
-                        <source src={featureVideo4MP4} type="video/mp4"/> */}
-                    </FeatureVideo>
-                </FeatureImageWrapper>
-            </FeatureImageSection>
+            
         </Container>
         </>
     )

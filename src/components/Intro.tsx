@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import AnimatedText from "./AnimatedText";
-
 import styled from "styled-components";
+
+import { breakpoints } from "../styles/breakpoints";
 
 const Container = styled.div`
     width: 100%;
-    border: 1px solid blue;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: ${breakpoints.sm}px) {
+      height: 30vh;  
+    }
 `
 
 const Intro = () => {
@@ -45,11 +49,11 @@ const Intro = () => {
           variants={container}
         >
             <Container>
-                <div className="container">
-                    {introText.map((item, index) => {
-                    return <AnimatedText {...item} key={index} />;
-                    })}
-                </div>
+              <div className="container">
+                {introText.map((item, index) => {
+                return <AnimatedText {...item} key={index} />;
+                })}
+              </div>
           </Container>
         </motion.div>
       );
