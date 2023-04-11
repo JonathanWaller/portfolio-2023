@@ -1,10 +1,9 @@
 import { useRef } from 'react';
-
 import styled from 'styled-components';
 
 import Nav from './components/Nav';
 import Intro from './components/Intro';
-import Experience from './components/Experience/Experience';
+// import Experience from './components/Experience/Experience';
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
@@ -13,8 +12,10 @@ import { sectionMargins } from './styles/mixins';
 
 
 const AppContainer = styled.div`
-  height: 100vh;
+  // height: 100vh;
+  height: 100%;
   width: 100vw;
+  padding-bottom: 100px;
 `
 
 const Container = styled.div`

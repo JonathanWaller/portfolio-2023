@@ -139,7 +139,7 @@ const FeatureImageSection = styled.div`
 
     display: flex;
     flex-grow: 1;
-    border: 1px solid blue;
+    // border: 1px solid blue;
 `
 
 const FeatureImageWrapper = styled.div`
