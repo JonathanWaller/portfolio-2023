@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f027c5f9.css",
+    "main.js": "/static/js/main.d4af720f.js",
+    "static/js/787.ef0c4325.chunk.js": "/static/js/787.ef0c4325.chunk.js",
+    "static/media/splash.png": "/static/media/splash.91304ecfed3500a3e58c.png",
+    "static/media/properties.png": "/static/media/properties.b43aaed0d2503f3521c8.png",
+    "static/media/property.png": "/static/media/property.ca0eaaef4ec37a58e9f7.png",
+    "static/media/beak-2.png": "/static/media/beak-2.24318f74f7c0f37a5e7a.png",
+    "static/media/running-viz.gif": "/static/media/running-viz.f7712e9cc110b3645c99.gif",
+    "static/media/beak-3.png": "/static/media/beak-3.4a5c5e899b677888c3a1.png",
+    "static/media/property2.png": "/static/media/property2.f6d122e02e6bc70db87a.png",
+    "static/media/beak-1.png": "/static/media/beak-1.8c94a0324d462d3c643a.png",
+    "static/media/beak-5.png": "/static/media/beak-5.effc0fda477945c6a61f.png",
+    "static/media/gw-feature-2.png": "/static/media/gw-feature-2.ba7a83789aeae595fcf1.png",
+    "static/media/running-year.png": "/static/media/running-year.f825ca1df78110b76f9c.png",
+    "static/media/running-all.png": "/static/media/running-all.65d35445694366edff1a.png",
+    "static/media/beak-4.png": "/static/media/beak-4.43889fb2f15d28ab5183.png",
+    "static/media/gw-feature-1.png": "/static/media/gw-feature-1.1d3062950c98933e3fd8.png",
+    "static/media/gw-feature-3.png": "/static/media/gw-feature-3.a1efcf4ca997bda6a52a.png",
+    "static/media/contactMap.png": "/static/media/contactMap.63b1399b9eb7bf93f592.png",
+    "index.html": "/index.html",
+    "main.f027c5f9.css.map": "/static/css/main.f027c5f9.css.map",
+    "main.d4af720f.js.map": "/static/js/main.d4af720f.js.map",
+    "787.ef0c4325.chunk.js.map": "/static/js/787.ef0c4325.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f027c5f9.css",
+    "static/js/main.d4af720f.js"
+  ]
+}
