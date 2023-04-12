@@ -1,8 +1,8 @@
-import React, { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import useWindowWidth from "react-hook-use-window-width";
 import TagCloud from "TagCloud";
 import './TextSphere.css';
-
+import { skills } from "../../utils/common";
 import { breakpoints } from "../../styles/breakpoints";
 
 const TextSphere = () => {
@@ -17,25 +17,8 @@ const TextSphere = () => {
 
   useEffect(() => {
     const container = '.tagcloud';
-    const texts = [
-      'TypeScript',
-      'SASS',
-      'JavaScript',
-      'React',
-      'Next.js',
-      'Redux',
-      'Node.js',
-      'Web3',
-      'D3.js',
-      'Socket.io',
-      'Styled Components'
-    ];
 
     const options = {
-      // radius: 300 ,
-      // radius: 200,
-      // radius: width < breakpoints.md ? 100 : 200,
-      // radius: width < breakpoints.sm ? 100 : width < breakpoints.md ? 100 : 100,
       radius: checkWidth(),
       maxSpeed: 'normal',
       initSpeed: 'normal',
@@ -43,7 +26,8 @@ const TextSphere = () => {
       keep: false
     };
 
-    TagCloud(container, texts, options);
+    TagCloud(container, skills, options);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

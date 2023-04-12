@@ -5,8 +5,8 @@ import styled from "styled-components";
 import Heading from "../shared/Heading";
 import Home from "../Home";
 
-import { mapLocations } from "../../utils/common";
-import { locationDetails } from "../../services/mapServices";
+// import { mapLocations } from "../../utils/common";
+// import { locationDetails } from "../../services/mapServices";
 
 import { Coordinate } from "../../types/map";
 
@@ -15,7 +15,6 @@ const Container = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
-
     border: 1px solid pink;
 
 `

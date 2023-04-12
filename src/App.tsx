@@ -15,7 +15,6 @@ const AppContainer = styled.div`
   // height: 100vh;
   height: 100%;
   width: 100vw;
-  padding-bottom: 100px;
 `
 
 const Container = styled.div`
@@ -30,10 +29,17 @@ const App = () => {
   const viewRef = useRef<HTMLInputElement>(null)
 
   const handleClickScroll = (id:string) => {
-    const element = document.getElementById(id);
+    const element:any = document.getElementById(id);
+    const navOffset = 65; 
+    var elementPosition = element.getBoundingClientRect().top;
+    var offsetPosition = elementPosition + window.pageYOffset - navOffset;
     if (element) {
       // Will scroll smoothly to the top of the next section
-      element.scrollIntoView({ behavior: 'smooth' });
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+
     }
   };
 

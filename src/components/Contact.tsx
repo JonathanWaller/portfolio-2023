@@ -17,7 +17,6 @@ const ContactContainer = styled.div`
         align-items: center;
         gap: 20px;
     }
-   
 `
 
 const LeftPanel = styled.div`
@@ -142,7 +141,6 @@ const Contact = () => {
     return(
         <>
             <Heading headingText="Contact" />
-
             <ContactContainer>
                 <LeftPanel>
                     <ContactText>
@@ -158,11 +156,8 @@ const Contact = () => {
                         <Social href="https://github.com/JonathanWaller" target="_blank" rel="noreferrer"><StyledGithub /></Social>
                     </SocialsContainer>
                 </LeftPanel>
-
                 <MapContainer>
-                <Map 
-                    src={contactMap}
-                />
+                    <Map src={contactMap}/>
                 </MapContainer>
             </ContactContainer>
         </>

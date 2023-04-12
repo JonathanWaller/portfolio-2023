@@ -13,7 +13,7 @@ const Container = styled.div`
     @media (max-width: ${breakpoints.md}px) {
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 60px;
     }
 `
 
@@ -70,7 +70,7 @@ const About = () => {
 
     return(
         <>
-            <Heading headingText="About Me" />
+            <Heading headingText="About Me"/>
             <Container>
                 <LeftColumn>
                     <TextContainer>
