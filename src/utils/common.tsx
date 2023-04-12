@@ -163,3 +163,17 @@ export const projectImagesMobile = [
 ]
 
 export const projectMobile = projects.reduce( (acc:any,curr: Project,ind: number) => [...acc, {...curr, ...projectImagesMobile[ind]}] , [])
+
+export const skills: string[] = [
+    'TypeScript',
+    'JavaScript',
+    'React',
+    'Next.js',
+    'Redux',
+    'SASS',
+    'Node.js',
+    'Web3',
+    'D3.js',
+    'Socket.IO',
+    'Styled Components'
+];

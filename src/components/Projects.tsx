@@ -6,7 +6,7 @@ import useWindowWidth from "react-hook-use-window-width";
 import Heading from "./shared/Heading";
 
 import { breakpoints } from "../styles/breakpoints";
-import { gray, white, black, darkGray } from "../styles/colors";
+import { gray, white, black, darkGray, offWhite, primaryColor } from "../styles/colors";
 
 import { greenwoodImages, restayImages, runningImages, projects, projectMobile } from "../utils/common";
 import { Project, ProjectImage } from "../types/projects";
@@ -17,11 +17,30 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: start;
 
+    @media (max-width: ${breakpoints.xxxl}px) {
+        margin-top: -200px;
+        margin-bottom: -200px;
+    }
+    @media (max-width: ${breakpoints.xxl}px) {
+        margin-top: -300px;
+        margin-bottom: -300px;
+    }
+    @media (max-width: ${breakpoints.xl}px) {
+        margin-top: -300px;
+        margin-bottom: -300px;
+    }
+    @media (max-width: ${breakpoints.lg}px) {
+   
+    }
     @media (max-width: ${breakpoints.md}px) {
         flex-direction: column;
-        // padding-top: 200px;
-        // padding-bottom: 200px;
+        margin-top: 0;
+        margin-bottom: 0;
     }
+    @media (max-width: ${breakpoints.sm}px) {
+
+    }
+
 `
 
 const FeatureTextColumn = styled.div`
@@ -31,8 +50,9 @@ const FeatureTextColumn = styled.div`
     gap: 500px;
     padding-top: 350px;
     padding-bottom: 350px;
+    // padding-top: 150px;
+    // padding-bottom: 150px;
     padding-right: 10px;
-    border: 1px solid red;
 `
 
 const FeatureTextContainer = styled.div`
@@ -139,7 +159,6 @@ const FeatureImageSection = styled.div`
 
     display: flex;
     flex-grow: 1;
-    border: 1px solid blue;
 `
 
 const FeatureImageWrapper = styled.div`
@@ -156,7 +175,6 @@ const FeatureImageWrapper = styled.div`
     top: 0;
     left: 0;
 
-    border: 1px solid red;
 `
 
 const MobileProjectContainer = styled.div`
@@ -206,14 +224,14 @@ const FeatureImageContainer = styled.div`
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.07);
     border-radius: 11px;
     overflow: hidden;
-
-    border: 1px solid green;
     height: auto;
     width: 100%;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background: ${offWhite};
 
     // background-size: contain;
 
@@ -249,6 +267,8 @@ const StyledImage = styled.img`
     border-radius: 8px;
     width: 100%;
     height: auto;
+
+    // box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
 
     @media (max-width: ${breakpoints.md}px) {
@@ -264,22 +284,62 @@ const StyledImage = styled.img`
     image-rendering: crisp-edges;
 `
 
-const LeftArrow = styled(ArrowLeft)<{dark?: boolean}>`
-    color: ${({dark}) => dark ? `${black}` : `${gray}`};
+const ArrowContainerLeft = styled.div`
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 1px solid ${offWhite};
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+    background: ${offWhite};
+
     position: absolute;
     top: 50%;
     left: 5px;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.6);
+    }
+
+`
+
+const LeftArrow = styled(ArrowLeft)<{dark?: boolean}>`
+    color: ${primaryColor};
+    
     &:hover {
         cursor: pointer;
     }
 `
 
-const RightArrow = styled(ArrowRight)<{dark?: boolean}>`
-    color: ${({dark}) => dark ? `${black}` : `${gray}`};
+const ArrowContainerRight = styled.div`
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 1px solid ${offWhite};
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+    background: ${offWhite};
+
     position: absolute;
     top: 50%;
     right: 5px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.6);
+    }
+
+`
+
+const RightArrow = styled(ArrowRight)<{dark?: boolean}>`
+    color: ${primaryColor};
 
     &:hover {
         cursor: pointer;
@@ -300,8 +360,6 @@ const Projects: React.FC<Props> = ({viewRef}) => {
     })
 
     const { greenwood, restay, running } = imageState;
-
-
 
     const projectImagesDesktop: ProjectImage[] = [
         {
@@ -326,9 +384,9 @@ const Projects: React.FC<Props> = ({viewRef}) => {
 
 
 
-    const test2 = (name: string, direction: 'left' | 'right') => {
+    const condleArrowClick = (name: string, direction: 'left' | 'right') => {
         
-        const innterTest = () => {
+        const determineDirection = () => {
             switch( name ) {
                 case 'greenwood':
                     return [imageState.greenwood, greenwoodImages.length]
@@ -341,7 +399,7 @@ const Projects: React.FC<Props> = ({viewRef}) => {
             }
         }
 
-        const [ state, length ] = innterTest();
+        const [ state, length ] = determineDirection();
         
         if( direction === 'left' ) {
             if( state === 0 ){
@@ -372,9 +430,9 @@ const Projects: React.FC<Props> = ({viewRef}) => {
         let feature3 = document.getElementById( 'feature-3' )
         // let feature4 = document.getElementById( 'feature-4' )
 
-        let featureVideo1 = document.getElementById( 'feature-1-video' ) as HTMLVideoElement
-        let featureVideo2 = document.getElementById( 'feature-2-video' ) as HTMLVideoElement
-        let featureVideo3 = document.getElementById( 'feature-3-video' ) as HTMLVideoElement
+        // let featureVideo1 = document.getElementById( 'feature-1-video' ) as HTMLVideoElement
+        // let featureVideo2 = document.getElementById( 'feature-2-video' ) as HTMLVideoElement
+        // let featureVideo3 = document.getElementById( 'feature-3-video' ) as HTMLVideoElement
         // let featureVideo4 = document.getElementById( 'feature-4-video' ) as HTMLVideoElement
 
 
@@ -385,33 +443,33 @@ const Projects: React.FC<Props> = ({viewRef}) => {
             let feature1Observer = new IntersectionObserver((entries) => {
                 if(entries[0].isIntersecting) {
                     setImageVisible('1')
-                    featureVideo1.pause()
-                    featureVideo1.currentTime = 0
-                    setTimeout(() => {
-                        featureVideo1.play()
-                    }, 450)
+                    // featureVideo1.pause()
+                    // featureVideo1.currentTime = 0
+                    // setTimeout(() => {
+                    //     featureVideo1.play()
+                    // }, 450)
                 }
             }, {threshold: 0.5})
     
             let feature2Observer = new IntersectionObserver((entries) => {
                 if(entries[0].isIntersecting) {
                     setImageVisible('2')
-                    featureVideo2.pause()
-                    featureVideo2.currentTime = 0
-                    setTimeout(() => {
-                        featureVideo2.play()
-                    }, 450)
+                    // featureVideo2.pause()
+                    // featureVideo2.currentTime = 0
+                    // setTimeout(() => {
+                    //     featureVideo2.play()
+                    // }, 450)
                 }
             }, {threshold: 0.5})
     
             let feature3Observer = new IntersectionObserver((entries) => {
                 if(entries[0].isIntersecting) {
                     setImageVisible('3')
-                    featureVideo3.pause()
-                    featureVideo3.currentTime = 0
-                    setTimeout(() => {
-                        featureVideo3.play()
-                    }, 450)
+                    // featureVideo3.pause()
+                    // featureVideo3.currentTime = 0
+                    // setTimeout(() => {
+                    //     featureVideo3.play()
+                    // }, 450)
                 }
             }, {threshold: 0.5})
 
@@ -461,7 +519,7 @@ const Projects: React.FC<Props> = ({viewRef}) => {
                 <FeatureTextColumn id="feature-text-column">
                     {
                         projects.map( ({textId,url, name, header, description }: Project, index: number) => (
-                            <FeatureTextContainer id={textId}>
+                            <FeatureTextContainer id={textId} key={index}>
                                 <FeatureTypeTagRainbowContainer>
                                     <FeatureTypeTag target="_blank" rel="noreferrer" href={url}>
                                         {name}
@@ -476,11 +534,15 @@ const Projects: React.FC<Props> = ({viewRef}) => {
                 </FeatureTextColumn>
                 <FeatureImageSection>
                     {
-                        projectImagesDesktop.map( ({id, name, imgSrc, altName}: ProjectImage, index: number ) => (
-                            <FeatureImageWrapper style={{opacity: imageVisible === id ? 1 : 0 }} key={id}>
+                        projectImagesDesktop.map( ({id, name, imgSrc, altName}: ProjectImage, index) => (
+                            <FeatureImageWrapper style={{opacity: imageVisible === id ? 1 : 0 }} key={index}>
                                 <FeatureImageContainer>
-                                    <LeftArrow onClick={()=>handleNavigate( name, test2(name, 'left') )}/>
-                                    <RightArrow onClick={()=>handleNavigate( name, test2(name, 'right') )} />
+                                    <ArrowContainerLeft onClick={()=>handleNavigate( name, condleArrowClick(name, 'left') )}>
+                                        <LeftArrow />
+                                    </ArrowContainerLeft>
+                                    <ArrowContainerRight onClick={()=>handleNavigate( name, condleArrowClick(name, 'right') )}>
+                                        <RightArrow />
+                                    </ArrowContainerRight> 
                                     <StyledImage src={imgSrc} alt={altName} /> 
                                 </FeatureImageContainer>
                             </FeatureImageWrapper>
@@ -491,8 +553,8 @@ const Projects: React.FC<Props> = ({viewRef}) => {
                 : 
                 <MobileProjectContainer>
                 {
-                    projectMobile.map( ({textId, url, name, header, description, id, imgSrc, altName}: any ) => (
-                        <MobileGroup key={id}>
+                    projectMobile.map( ({textId, url, name, header, description, id, imgSrc, altName}: any, index: number ) => (
+                        <MobileGroup key={index}>
                             <FeatureTextContainer id={textId}>
                                 <FeatureTypeTagRainbowContainer>
                                     <FeatureTypeTag target="_blank" rel="noreferrer" href={url}>
@@ -513,8 +575,6 @@ const Projects: React.FC<Props> = ({viewRef}) => {
                 }
                 </MobileProjectContainer>
             }
-
-            
         </Container>
         </>
     )

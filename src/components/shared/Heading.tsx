@@ -16,7 +16,8 @@ const Text = styled.h1`
 
     text-align: center;
     letter-spacing: -0.02em;
-    margin-bottom: 50px;
+    // margin-bottom: 50px;
+    margin-bottom: 100px;
 
     color: ${white}
 
@@ -39,6 +40,7 @@ const Text = styled.h1`
     @media (max-width: ${breakpoints.sm}px) {
        font-size: 50px;
        line-height: 50px;
+       margin-bottom: 50px;
     }
 `
 

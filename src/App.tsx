@@ -1,10 +1,9 @@
 import { useRef } from 'react';
-
 import styled from 'styled-components';
 
 import Nav from './components/Nav';
 import Intro from './components/Intro';
-import Experience from './components/Experience/Experience';
+// import Experience from './components/Experience/Experience';
 import About from './components/About';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
@@ -13,7 +12,8 @@ import { sectionMargins } from './styles/mixins';
 
 
 const AppContainer = styled.div`
-  height: 100vh;
+  // height: 100vh;
+  height: 100%;
   width: 100vw;
 `
 
@@ -29,10 +29,17 @@ const App = () => {
   const viewRef = useRef<HTMLInputElement>(null)
 
   const handleClickScroll = (id:string) => {
-    const element = document.getElementById(id);
+    const element:any = document.getElementById(id);
+    const navOffset = 65; 
+    var elementPosition = element.getBoundingClientRect().top;
+    var offsetPosition = elementPosition + window.pageYOffset - navOffset;
     if (element) {
       // Will scroll smoothly to the top of the next section
-      element.scrollIntoView({ behavior: 'smooth' });
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+
     }
   };
 
