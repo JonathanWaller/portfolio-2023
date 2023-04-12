@@ -1,4 +1,4 @@
-export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
+export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl'
 
 /**
  * When using breakpoints, they should always be used in line with css media queries.
@@ -13,10 +13,12 @@ export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
     'md': 768,
     'lg': 992,
     'xl': 1200,
-    'xxl': 1400
+    'xxl': 1400,
+    'xxxl': 1700
 }
 
 export const getActiveBreakpoint = ( width: number ): Breakpoint => {
+    if ( width > breakpoints.xxxl ) return 'xxxl';
     if ( width > breakpoints.xxl ) return 'xxl';
     if ( width > breakpoints.xl ) return 'xl';
     if ( width > breakpoints.lg ) return 'lg';

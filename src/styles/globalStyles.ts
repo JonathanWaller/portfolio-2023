@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { black, white, offWhite } from './colors';
+import { offWhite, darkGray } from './colors';
 
 export const GlobalStyle = createGlobalStyle`
     @font-face {
@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         background-color: ${offWhite};
-        color: ${black};
+        color: ${darkGray};
         
         overflow-x: hidden;
     }
